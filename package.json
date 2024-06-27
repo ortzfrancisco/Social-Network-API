@@ -1,0 +1,16 @@
+{
+    "name": "social-network-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.19.2",
+        "mongoose": "^8.4.4",
+        "package-name": "^0.1.0"
+    }
+}
