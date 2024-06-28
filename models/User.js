@@ -1,7 +1,5 @@
-// Imports
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
-// User schema
 const userSchema = new Schema(
     {
         username: {
@@ -14,18 +12,18 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            match: [/.+@.+\..+/, "Must match an email address!"],
+            match: [/.+@.+\..+/, 'Must match an email address!'],
         },
         thoughts: [
             {
                 type: Schema.Types.ObjectId,
-                ref: "thought",
+                ref: 'Thought',
             },
         ],
         friends: [
             {
                 type: Schema.Types.ObjectId,
-                ref: "user",
+                ref: 'User',
             },
         ],
     },
@@ -37,13 +35,10 @@ const userSchema = new Schema(
     }
 );
 
-// Increases friend count in User model object when friends are added by a user
-userSchema.virtual("friendCount").get(function () {
+userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
 
-// Creates User model with userSchema
-const User = model("user", userSchema);
+const User = model('User', userSchema);
 
-// Exports
 module.exports = User;

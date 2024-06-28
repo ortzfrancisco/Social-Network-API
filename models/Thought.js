@@ -1,15 +1,12 @@
-// Imports
-const { Schema, model } = require("mongoose");
-const reactionSchema = require("./Reaction");
+const { Schema, model } = require('mongoose');
 
-// Thought schema
 const thoughtSchema = new Schema(
     {
         thoughtText: {
             type: String,
             required: true,
-            maxlength: 280,
             minlength: 1,
+            maxlength: 280,
         },
         createdAt: {
             type: Date,
@@ -19,7 +16,23 @@ const thoughtSchema = new Schema(
             type: String,
             required: true,
         },
-        reactions: [reactionSchema],
+        reactions: [
+            {
+                reactionBody: {
+                    type: String,
+                    required: true,
+                    maxlength: 280,
+                },
+                username: {
+                    type: String,
+                    required: true,
+                },
+                createdAt: {
+                    type: Date,
+                    default: Date.now,
+                },
+            },
+        ],
     },
     {
         toJSON: {
@@ -29,13 +42,9 @@ const thoughtSchema = new Schema(
     }
 );
 
-// Increases reaction count in Thought model object when reactions are added to a thought
-thoughtSchema.virtual("reactionCount").get(function () {
+thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 });
 
-// Creates Thought model with thoughtSchema
-const Thought = model("thought", thoughtSchema);
-
-// Exports
+const Thought = model('Thought', thoughtSchema);
 module.exports = Thought;
